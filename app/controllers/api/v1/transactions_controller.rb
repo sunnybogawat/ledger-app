@@ -19,7 +19,7 @@ class Api::V1::TransactionsController < ApplicationController
     @transaction.destroy
     head :no_content
   end  
- 
+  
   private 
 
   def transaction_params
