@@ -32,7 +32,7 @@ RSpec.describe 'Transactions API' do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Ledger with id=0/)
+        expect(response.body).to match("{\"message\":\"Couldn't find Ledger with 'id'=0\"}")
       end
     end
   end
@@ -80,8 +80,8 @@ RSpec.describe 'Transactions API' do
     context 'when an invalid request' do
       before { post "/api/v1/ledgers/#{ledger_id}/transactions", params: {} }
 
-      it 'returns status code 400' do
-        expect(response).to have_http_status(400)
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
       end
 
       it 'returns a failure message' do
