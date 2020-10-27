@@ -1,7 +1,9 @@
 class Transaction < ApplicationRecord
   belongs_to :ledger
+  has_many :taggings
+  has_many :tags, through: :taggings
   TRANSACTION_TYPES = ["expense","revenue"]
- 
+   
   validates :ledger, presence: true
   validates :amount, presence: true, numericality: true
   validates :transaction_type, presence: true, inclusion: { in: TRANSACTION_TYPES}

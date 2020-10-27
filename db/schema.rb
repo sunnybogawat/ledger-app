@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201024191144) do
+ActiveRecord::Schema.define(version: 20201027163808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,21 @@ ActiveRecord::Schema.define(version: 20201024191144) do
   create_table "ledgers", force: :cascade do |t|
     t.string   "name"
     t.decimal  "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "transaction_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["transaction_id"], name: "index_taggings_on_transaction_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,5 +48,7 @@ ActiveRecord::Schema.define(version: 20201024191144) do
     t.index ["ledger_id"], name: "index_transactions_on_ledger_id", using: :btree
   end
 
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "taggings", "transactions"
   add_foreign_key "transactions", "ledgers"
 end
