@@ -4,31 +4,48 @@ This is a ledger API app where users can create ledgers and then add expense and
 those ledgers. 
 
 It supports following rest end points
-1.Create ledger
+# Create ledger
    POST   /api/v1/ledgers
+   
    input: { name: “San Francisco General Ledger”, starting_balance: 100.00 }
-2. Create transaction
+   
+# Create transaction
     POST   /api/v1/ledgers/:ledger_id/transactions
+    
     input: { ledger_id: 1, amount: 13.95, date: "2020-01-15", type: "expenses", description: "Pens" }
+    
     input: { ledger_id: 1, amount: 8.79, date: "2020-01-22", type: "expenses", description: "Pencils" }
+    
     input: { ledger_id: 1, amount: 38.01, date: "2020-01-26", type: "revenues", description: "Parking meter fees" }
+    
     input: { ledger_id: 1, amount: 24.20, date: "2020-02-15", type: "expenses", description: "Staplers" }
     
-3. List transactions
+    
+# List transactions
+
     GET    /api/v1/ledgers/:ledger_id/transactions
+    
     input: { ledger_id: 1 }
     
-4. Get ledger totals
+    
+# Get ledger totals
+
     GET    /api/v1/ledgers/:ledger_id/ledger_totals/:year/:month
+    
     input: { ledger_id: 1, year: “2020”, month: “01” }
+    
     input: { ledger_id: 1, year: “2020”, month: “02” }
     
-5. Get current balance
+# Get current balance
+
    GET    /api/v1/ledgers/:ledger_id/current_balance
+   
    input: { ledger_id: 1 }
+   
 
 
  Following are the few important points to be considered for scaling rails app
+ 
  # Make Code as Simple as Possible
  # Use of Right Gem
  # Choosing a app server 
